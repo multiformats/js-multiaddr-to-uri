@@ -1,0 +1,34 @@
+{
+  "name": "multiaddr-to-stupid-string",
+  "version": "0.0.0",
+  "description": "Convert a Multiaddr to a stupid string /dnsaddr/ipfs.io/http -> http://ipfs.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm run test:coverage",
+    "test:coverage": "nyc --reporter=lcov --reporter=text ava",
+    "lint": "standard"
+  },
+  "keywords": [
+    "multiaddr",
+    "toString",
+    "URL"
+  ],
+  "author": "Alan Shaw",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "nyc": "^11.6.0",
+    "standard": "^11.0.1"
+  },
+  "dependencies": {
+    "multiaddr": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tableflip/multiaddr-to-stupid-string.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tableflip/multiaddr-to-stupid-string/issues"
+  },
+  "homepage": "https://github.com/tableflip/multiaddr-to-stupid-string#readme"
+}
