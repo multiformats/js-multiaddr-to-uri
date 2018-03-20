@@ -1,6 +1,6 @@
 {
   "name": "multiaddr-to-stupid-string",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Convert a Multiaddr to a stupid string /dnsaddr/ipfs.io/http -> http://ipfs.io",
   "main": "index.js",
   "scripts": {
