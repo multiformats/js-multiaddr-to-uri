@@ -1,5 +1,5 @@
 const test = require('ava')
-const toStupid = require('./')
+const toUri = require('./')
 
 test('should convert multiaddr to stupid', (t) => {
   const data = [
@@ -76,9 +76,9 @@ test('should convert multiaddr to stupid', (t) => {
     ]
   ]
 
-  data.forEach(d => t.is(toStupid(d[0]), d[1]))
+  data.forEach(d => t.is(toUri(d[0]), d[1]))
 })
 
 test('should throw for unsupported protocol', (t) => {
-  t.throws(() => toStupid('/quic'))
+  t.throws(() => toUri('/quic'))
 })

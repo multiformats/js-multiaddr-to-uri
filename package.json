@@ -1,7 +1,7 @@
 {
-  "name": "multiaddr-to-stupid-string",
+  "name": "multiaddr-to-uri",
   "version": "1.0.0",
-  "description": "Convert a Multiaddr to a stupid string /dnsaddr/ipfs.io/http -> http://ipfs.io",
+  "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run test:coverage",
@@ -25,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tableflip/multiaddr-to-stupid-string.git"
+    "url": "git+https://github.com/tableflip/multiaddr-to-uri.git"
   },
   "bugs": {
-    "url": "https://github.com/tableflip/multiaddr-to-stupid-string/issues"
+    "url": "https://github.com/tableflip/multiaddr-to-uri/issues"
   },
-  "homepage": "https://github.com/tableflip/multiaddr-to-stupid-string#readme"
+  "homepage": "https://github.com/tableflip/multiaddr-to-uri#readme"
 }

@@ -1,7 +1,7 @@
 const Multiaddr = require('multiaddr')
 const reduceValue = (_, v) => v
 
-const StupidReducers = {
+const Reducers = {
   ip4: reduceValue,
   ip6: reduceValue,
   tcp: (str, content, i, parts) => (
@@ -32,7 +32,7 @@ module.exports = (multiaddr) => (
       content: tuple[1]
     }))
     .reduce((str, part, i, parts) => {
-      const reduce = StupidReducers[part.protocol]
+      const reduce = Reducers[part.protocol]
       if (!reduce) throw new Error(`Unsupported protocol ${part.protocol}`)
       return reduce(str, part.content, i, parts)
     }, '')

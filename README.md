@@ -1,22 +1,22 @@
-# multiaddr-to-stupid-string
+# multiaddr-to-uri
 
-[![Build Status](https://travis-ci.org/tableflip/multiaddr-to-stupid-string.svg?branch=master)](https://travis-ci.org/tableflip/multiaddr-to-stupid-string) [![dependencies Status](https://david-dm.org/tableflip/multiaddr-to-stupid-string/status.svg)](https://david-dm.org/tableflip/multiaddr-to-stupid-string) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/tableflip/multiaddr-to-uri.svg?branch=master)](https://travis-ci.org/tableflip/multiaddr-to-uri) [![dependencies Status](https://david-dm.org/tableflip/multiaddr-to-uri/status.svg)](https://david-dm.org/tableflip/multiaddr-to-uri) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
-> Convert a Multiaddr to a stupid string /dnsaddr/ipfs.io/http -> http://ipfs.io
+> Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io
 
 ## Install
 
 ```sh
-npm install multiaddr-to-stupid-string
+npm install multiaddr-to-uri
 ```
 
 ## Usage
 
 ```js
-const toStupid = require('multiaddr-to-stupid-string')
+const toUri = require('multiaddr-to-uri')
 
-console.log(toStupid('/dnsaddr/protocol.ai/https'))
+console.log(toUri('/dnsaddr/protocol.ai/https'))
 // -> https://protocol.ai
 ```
 
@@ -25,11 +25,11 @@ Note:
 * Might be lossy - e.g. a DNSv6 multiaddr
 * Can throw if the passed multiaddr:
     * is not a valid multiaddr
-    * is not supported as a stupid string e.g. circuit
+    * is not supported as a URI e.g. circuit
 
 ## Contribute
 
-Feel free to dive in! [Open an issue](https://github.com/tableflip/multiaddr-to-stupid-string/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/tableflip/multiaddr-to-uri/issues/new) or submit PRs.
 
 ## License
 
