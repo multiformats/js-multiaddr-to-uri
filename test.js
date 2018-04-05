@@ -1,7 +1,7 @@
 const test = require('ava')
 const toUri = require('./')
 
-test('should convert multiaddr to stupid', (t) => {
+test('should convert multiaddr to URI', (t) => {
   const data = [
     ['/ip4/127.0.0.1', '127.0.0.1'],
     ['/ip4/127.0.0.1/http', 'http://127.0.0.1'],
