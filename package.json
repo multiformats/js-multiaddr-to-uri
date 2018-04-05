@@ -1,6 +1,6 @@
 {
   "name": "multiaddr-to-uri",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
   "main": "index.js",
   "scripts": {
