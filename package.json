@@ -21,7 +21,7 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
-    "multiaddr": "^5.0.0"
+    "multiaddr": "multiformats/js-multiaddr#feat/bundle-size"
   },
   "repository": {
     "type": "git",
