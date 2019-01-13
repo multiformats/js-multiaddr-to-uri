@@ -4,9 +4,9 @@ const reduceValue = (_, v) => v
 const Reducers = {
   ip4: reduceValue,
   ip6: (str, content, i, parts) => (
-    parts.some(p => ['tcp', 'udp', 'http', 'https', 'ws', 'wss'].includes(p.protocol))
-      ? `[${content}]`
-      : content
+    parts.length === 1 && parts[0].protocol === 'ip6'
+      ? content
+      : `[${content}]`
   ),
   tcp: (str, content, i, parts) => (
     parts.some(p => ['http', 'https', 'ws', 'wss'].includes(p.protocol))
