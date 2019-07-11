@@ -22,57 +22,63 @@ test('should convert multiaddr to URI', (t) => {
     ['/dnsaddr/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
     ['/dnsaddr/protocol.ai/tcp/80/http', 'http://protocol.ai:80'],
     ['/dnsaddr/protocol.ai/tcp/80/https', 'https://protocol.ai:80'],
-    ['/dnsaddr/ipfs.io/ws', 'ws://ipfs.io'],
+    ['/dnsaddr/ipfs.io/ws/libp2pEndpoint', 'ws://ipfs.io/libp2pEndpoint'],
     ['/dnsaddr/ipfs.io/http', 'http://ipfs.io'],
     ['/dnsaddr/ipfs.io/https', 'https://ipfs.io'],
-    ['/ip4/1.2.3.4/tcp/3456/ws', 'ws://1.2.3.4:3456'],
-    ['/ip6/::/tcp/0/ws', 'ws://[::]:0'],
-    ['/dnsaddr/ipfs.io/wss', 'wss://ipfs.io'],
-    ['/ip4/1.2.3.4/tcp/3456/wss', 'wss://1.2.3.4:3456'],
-    ['/ip6/::/tcp/0/wss', 'wss://[::]:0'],
+    ['/ip4/1.2.3.4/tcp/3456/ws/libp2pEndpoint', 'ws://1.2.3.4:3456/libp2pEndpoint'],
+    ['/ip6/::/tcp/0/ws/libp2pEndpoint', 'ws://[::]:0/libp2pEndpoint'],
+    ['/dnsaddr/ipfs.io/wss/libp2pEndpoint', 'wss://ipfs.io/libp2pEndpoint'],
+    ['/ip4/1.2.3.4/tcp/3456/wss/libp2pEndpoint', 'wss://1.2.3.4:3456/libp2pEndpoint'],
+    ['/ip6/::/tcp/0/wss/libp2pEndpoint', 'wss://[::]:0/libp2pEndpoint'],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo',
-      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo'
+      '/ip4/1.2.3.4/tcp/3456/ws/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo',
+      'ws://1.2.3.4:3456/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo'
     ],
     [
-      '/dnsaddr/ipfs.io/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://ipfs.io/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/dnsaddr/ipfs.io/ws/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
+      'ws://ipfs.io/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
     ],
     [
-      '/dnsaddr/ipfs.io/wss/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'wss://ipfs.io/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/dnsaddr/ipfs.io/wss/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
+      'wss://ipfs.io/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
     ],
     [
-      '/ip6/::/tcp/0/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo5',
-      'ws://[::]:0/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo5'
+      '/ip6/::/tcp/0/ws/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo5',
+      'ws://[::]:0/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo5'
     ],
     [
-      '/dns4/wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star/ipfs/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79',
-      'wss://wrtc-star.discovery.libp2p.io:443/p2p-webrtc-star/ipfs/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79'
+      '/dns4/wrtc-star.discovery.libp2p.io/tcp/443/wss/libp2pEndpoint/p2p-webrtc-star/ipfs/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79',
+      'wss://wrtc-star.discovery.libp2p.io:443/libp2pEndpoint/p2p-webrtc-star/ipfs/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79'
     ],
     ['/ip4/1.2.3.4/tcp/3456/http/p2p-webrtc-direct', 'http://1.2.3.4:3456/p2p-webrtc-direct'],
     ['/ip6/::/tcp/0/http/p2p-webrtc-direct', 'http://[::]:0/p2p-webrtc-direct'],
-    ['/ip4/1.2.3.4/tcp/3456/ws/p2p-websocket-star', 'ws://1.2.3.4:3456/p2p-websocket-star'],
-    ['/ip6/::/tcp/0/ws/p2p-websocket-star', 'ws://[::]:0/p2p-websocket-star'],
     [
-      '/dnsaddr/localhost/ws/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://localhost/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip4/1.2.3.4/tcp/3456/ws/libp2pEndpoint/p2p-websocket-star',
+      'ws://1.2.3.4:3456/libp2pEndpoint/p2p-websocket-star'
     ],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://1.2.3.4:3456/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip6/::/tcp/0/ws/libp2pEndpoint/p2p-websocket-star',
+      'ws://[::]:0/libp2pEndpoint/p2p-websocket-star'
     ],
     [
-      '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3',
+      '/dnsaddr/localhost/ws/libp2pEndpoint/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
+      'ws://localhost/libp2pEndpoint/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+    ],
+    [
+      '/ip4/1.2.3.4/tcp/3456/ws/libp2pEndpoint/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
+      'ws://1.2.3.4:3456/libp2pEndpoint/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+    ],
+    [
+      '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/libp2pEndpoint/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3',
       'wss://ws-star.discovery.libp2p.io:443/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3'
     ],
     [
-      '/ip4/127.0.0.1/tcp/20008/ws/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj',
-      'ws://127.0.0.1:20008/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj'
+      '/ip4/127.0.0.1/tcp/20008/ws/libp2pEndpoint/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj',
+      'ws://127.0.0.1:20008/libp2pEndpoint/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj'
     ],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip4/1.2.3.4/tcp/3456/ws/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
+      'ws://1.2.3.4:3456/libp2pEndpoint/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
     ],
     [
       '/ip4/1.2.3.4/tcp/3456/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
