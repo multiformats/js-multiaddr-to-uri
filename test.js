@@ -70,7 +70,7 @@ test('should convert multiaddr to URI', (t) => {
     ],
     [
       '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/libp2pEndpoint/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3',
-      'wss://ws-star.discovery.libp2p.io:443/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3'
+      'wss://ws-star.discovery.libp2p.io:443/libp2pEndpoint/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3'
     ],
     [
       '/ip4/127.0.0.1/tcp/20008/ws/libp2pEndpoint/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj',
