@@ -18,10 +18,17 @@ const toUri = require('multiaddr-to-uri')
 
 console.log(toUri('/dnsaddr/protocol.ai/https'))
 // -> https://protocol.ai
+
+console.log(toUri('/ip4/127.0.0.1/tcp/8080'))
+// -> http://127.0.0.1:8080
+
+console.log(toUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
+// -> tcp://127.0.0.1:8080
 ```
 
 Note:
 
+* Assumes HTTP by default. Pass `assumeHttp: false` to disable this behavior.
 * Might be lossy - e.g. a DNSv6 multiaddr
 * Can throw if the passed multiaddr:
     * is not a valid multiaddr

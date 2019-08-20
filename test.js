@@ -7,19 +7,14 @@ test('should convert multiaddr to URI', (t) => {
     ['/ip4/127.0.0.1/http', 'http://127.0.0.1'],
     ['/ip6/fc00::', 'fc00::'],
     ['/ip6/fc00::/http', 'http://[fc00::]'],
-    ['/ip4/0.0.7.6/tcp/1234', 'tcp://0.0.7.6:1234'],
     ['/ip4/0.0.7.6/tcp/1234/http', 'http://0.0.7.6:1234'],
     ['/ip4/0.0.7.6/tcp/1234/https', 'https://0.0.7.6:1234'],
-    ['/ip6/::/tcp/0', 'tcp://[::]:0'],
     ['/ip4/0.0.7.6/udp/1234', 'udp://0.0.7.6:1234'],
     ['/ip6/::/udp/0', 'udp://[::]:0'],
     ['/dnsaddr/ipfs.io', 'ipfs.io'],
     ['/dns4/ipfs.io', 'ipfs.io'],
     ['/dns4/libp2p.io', 'libp2p.io'],
     ['/dns6/protocol.ai', 'protocol.ai'],
-    ['/dns4/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
-    ['/dns6/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
-    ['/dnsaddr/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
     ['/dnsaddr/protocol.ai/tcp/80/http', 'http://protocol.ai:80'],
     ['/dnsaddr/protocol.ai/tcp/80/https', 'https://protocol.ai:80'],
     ['/dnsaddr/ipfs.io/ws', 'ws://ipfs.io'],
@@ -81,6 +76,40 @@ test('should convert multiaddr to URI', (t) => {
   ]
 
   data.forEach(d => t.is(toUri(d[0]), d[1]))
+})
+
+test('should convert multiaddr to http(s):// URI when implicit { assumeHttp: true }', (t) => {
+  const data = [
+    ['/ip4/0.0.7.6/tcp/1234', 'http://0.0.7.6:1234'],
+    ['/ip6/::/tcp/0', 'http://[::]:0'],
+    ['/dns4/protocol.ai/tcp/80', 'http://protocol.ai'],
+    ['/dns6/protocol.ai/tcp/80', 'http://protocol.ai'],
+    ['/dns4/protocol.ai/tcp/8080', 'http://protocol.ai:8080'],
+    ['/dns6/protocol.ai/tcp/8080', 'http://protocol.ai:8080'],
+    ['/dns4/protocol.ai/tcp/443', 'https://protocol.ai'],
+    ['/dns6/protocol.ai/tcp/443', 'https://protocol.ai'],
+    ['/dnsaddr/protocol.ai/tcp/80', 'http://protocol.ai'],
+    ['/dnsaddr/protocol.ai/tcp/443', 'https://protocol.ai'],
+    ['/dnsaddr/protocol.ai/tcp/8080', 'http://protocol.ai:8080']
+  ]
+  data.forEach(d => t.is(toUri(d[0]), d[1]))
+})
+
+test('should convert multiaddr to tcp:// URI when explicit { assumeHttp: false }', (t) => {
+  const data = [
+    ['/ip4/0.0.7.6/tcp/1234', 'tcp://0.0.7.6:1234'],
+    ['/ip6/::/tcp/0', 'tcp://[::]:0'],
+    ['/dns4/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
+    ['/dns6/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
+    ['/dns4/protocol.ai/tcp/8080', 'tcp://protocol.ai:8080'],
+    ['/dns6/protocol.ai/tcp/8080', 'tcp://protocol.ai:8080'],
+    ['/dns4/protocol.ai/tcp/443', 'tcp://protocol.ai:443'],
+    ['/dns6/protocol.ai/tcp/443', 'tcp://protocol.ai:443'],
+    ['/dnsaddr/protocol.ai/tcp/80', 'tcp://protocol.ai:80'],
+    ['/dnsaddr/protocol.ai/tcp/443', 'tcp://protocol.ai:443'],
+    ['/dnsaddr/protocol.ai/tcp/8080', 'tcp://protocol.ai:8080']
+  ]
+  data.forEach(d => t.is(toUri(d[0], { assumeHttp: false }), d[1]))
 })
 
 test('should throw for unsupported protocol', (t) => {
