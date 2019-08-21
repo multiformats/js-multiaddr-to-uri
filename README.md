@@ -28,7 +28,9 @@ console.log(toUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
 
 Note:
 
-* Assumes HTTP by default. Pass `assumeHttp: false` to disable this behavior.
+* When `/tcp` is the last (terminating) protocol HTTP is assumed by default (implicit `assumeHttp: true`)
+  * this means produced URIs will start with `http://` instead of `tcp://`
+  * passing `{ assumeHttp: false }` disables this behavior
 * Might be lossy - e.g. a DNSv6 multiaddr
 * Can throw if the passed multiaddr:
     * is not a valid multiaddr
