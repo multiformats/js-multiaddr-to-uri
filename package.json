@@ -25,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tableflip/multiaddr-to-uri.git"
+    "url": "git+https://github.com/multiformats/js-multiaddr-to-uri.git"
   },
   "bugs": {
-    "url": "https://github.com/tableflip/multiaddr-to-uri/issues"
+    "url": "https://github.com/multiformats/js-multiaddr-to-uri/issues"
   },
-  "homepage": "https://github.com/tableflip/multiaddr-to-uri#readme"
+  "homepage": "https://github.com/multiformats/js-multiaddr-to-uri#readme"
 }
