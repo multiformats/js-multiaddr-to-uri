@@ -26,16 +26,16 @@ test('should convert multiaddr to URI', (t) => {
     ['/ip4/1.2.3.4/tcp/3456/wss', 'wss://1.2.3.4:3456'],
     ['/ip6/::/tcp/0/wss', 'wss://[::]:0'],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo',
-      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo'
+      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmWo6sLpfuhLnPNF1d2X6s9PXC5NvsRbC69uvHAJhZW9bk',
+      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmWo6sLpfuhLnPNF1d2X6s9PXC5NvsRbC69uvHAJhZW9bk'
     ],
     [
-      '/dnsaddr/ipfs.io/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://ipfs.io/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/dnsaddr/ipfs.io/ws/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'ws://ipfs.io/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ],
     [
-      '/dnsaddr/ipfs.io/wss/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'wss://ipfs.io/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/dnsaddr/ipfs.io/wss/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'wss://ipfs.io/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ],
     [
       '/ip6/::/tcp/0/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo5',
@@ -50,28 +50,32 @@ test('should convert multiaddr to URI', (t) => {
     ['/ip4/1.2.3.4/tcp/3456/ws/p2p-websocket-star', 'ws://1.2.3.4:3456/p2p-websocket-star'],
     ['/ip6/::/tcp/0/ws/p2p-websocket-star', 'ws://[::]:0/p2p-websocket-star'],
     [
-      '/dnsaddr/localhost/ws/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://localhost/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/dnsaddr/localhost/ws/p2p-websocket-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'ws://localhost/p2p-websocket-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://1.2.3.4:3456/p2p-websocket-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip4/1.2.3.4/tcp/3456/ws/p2p-websocket-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'ws://1.2.3.4:3456/p2p-websocket-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ],
     [
-      '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3',
-      'wss://ws-star.discovery.libp2p.io:443/p2p-websocket-star/ipfs/Qma3uqwymdqwXtC4uvmqqwwMhTDHD7xp9FzM75tQB5qRM3'
+      '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/QmP3vadpN9dqZ7j6KtmwP5Y4prg7XqdS7ixgZMWtXxBAbp',
+      'wss://ws-star.discovery.libp2p.io:443/p2p-websocket-star/ipfs/QmP3vadpN9dqZ7j6KtmwP5Y4prg7XqdS7ixgZMWtXxBAbp'
     ],
     [
       '/ip4/127.0.0.1/tcp/20008/ws/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj',
       'ws://127.0.0.1:20008/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj'
     ],
     [
-      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip4/1.2.3.4/tcp/3456/ws/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'ws://1.2.3.4:3456/p2p-webrtc-star/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ],
     [
-      '/ip4/1.2.3.4/tcp/3456/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4',
-      'tcp://1.2.3.4:3456/ipfs/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSoooo4'
+      '/ip4/1.2.3.4/tcp/3456/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'tcp://1.2.3.4:3456/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
+    ],
+    [
+      '/ip4/1.2.3.4/tcp/3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
+      'tcp://1.2.3.4:3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
     ]
   ]
 

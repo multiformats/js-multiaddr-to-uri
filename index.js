@@ -10,8 +10,8 @@ const tcpUri = (str, port, parts, opts) => {
   const last = parts[parts.length - 1]
   if (last.protocol === 'tcp') {
     // assume http and produce clean urls
-    protocol = port === 443 ? 'https' : 'http'
-    explicitPort = port === 443 || port === 80 ? '' : explicitPort
+    protocol = port === '443' ? 'https' : 'http'
+    explicitPort = port === '443' || port === '80' ? '' : explicitPort
   }
   return `${protocol}://${str}${explicitPort}`
 }
@@ -43,16 +43,18 @@ const Reducers = {
   'p2p-webrtc-direct': str => `${str}/p2p-webrtc-direct`
 }
 
-module.exports = (multiaddr, opts) => (
-  Multiaddr(multiaddr)
-    .stringTuples()
+module.exports = (multiaddr, opts) => {
+  const ma = Multiaddr(multiaddr)
+  const parts = multiaddr.toString().split('/').slice(1)
+  return ma
+    .tuples()
     .map(tuple => ({
-      protocol: Multiaddr.protocols.codes[tuple[0]].name,
-      content: tuple[1]
+      protocol: parts.shift(),
+      content: tuple[1] ? parts.shift() : null
     }))
     .reduce((str, part, i, parts) => {
       const reduce = Reducers[part.protocol]
       if (!reduce) throw new Error(`Unsupported protocol ${part.protocol}`)
       return reduce(str, part.content, i, parts, opts)
     }, '')
-)
+}
