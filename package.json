@@ -16,7 +16,7 @@
   "author": "Alan Shaw",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^2.4.0",
+    "ava": "^3.6.0",
     "nyc": "^15.0.0",
     "standard": "^14.3.1"
   },
