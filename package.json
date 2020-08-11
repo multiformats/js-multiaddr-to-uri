@@ -16,12 +16,12 @@
   "author": "Alan Shaw",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^2.4.0",
+    "ava": "^3.11.1",
     "nyc": "^15.0.0",
     "standard": "^14.3.1"
   },
   "dependencies": {
-    "multiaddr": "^7.2.1"
+    "multiaddr": "^8.0.0"
   },
   "repository": {
     "type": "git",
