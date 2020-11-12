@@ -18,7 +18,7 @@
   "devDependencies": {
     "ava": "^3.11.1",
     "nyc": "^15.0.0",
-    "standard": "^14.3.1"
+    "standard": "^16.0.2"
   },
   "dependencies": {
     "multiaddr": "^8.0.0"
