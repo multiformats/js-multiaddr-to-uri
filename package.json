@@ -18,10 +18,10 @@
   "devDependencies": {
     "ava": "^3.11.1",
     "nyc": "^15.0.0",
-    "standard": "^14.3.1"
+    "standard": "^16.0.3"
   },
   "dependencies": {
-    "multiaddr": "^9.0.0"
+    "multiaddr": "^9.0.1"
   },
   "repository": {
     "type": "git",
