@@ -76,6 +76,14 @@ test('should convert multiaddr to URI', (t) => {
     [
       '/ip4/1.2.3.4/tcp/3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
       'tcp://1.2.3.4:3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
+    ],
+    [
+      '/onion3/pzbmpqsyi2j2za2fwmiognupwozjlcoajbd3cgboetql7ooah63zywqd:1111',
+      'pzbmpqsyi2j2za2fwmiognupwozjlcoajbd3cgboetql7ooah63zywqd.onion:1111'
+    ],
+    [
+      '/onion3/pzbmpqsyi2j2za2fwmiognupwozjlcoajbd3cgboetql7ooah63zywqd:1111/ws',
+      'ws://pzbmpqsyi2j2za2fwmiognupwozjlcoajbd3cgboetql7ooah63zywqd.onion:1111'
     ]
   ]
 

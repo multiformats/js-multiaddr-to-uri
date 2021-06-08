@@ -40,7 +40,8 @@ const Reducers = {
   wss: str => `wss://${str}`,
   'p2p-websocket-star': str => `${str}/p2p-websocket-star`,
   'p2p-webrtc-star': str => `${str}/p2p-webrtc-star`,
-  'p2p-webrtc-direct': str => `${str}/p2p-webrtc-direct`
+  'p2p-webrtc-direct': str => `${str}/p2p-webrtc-direct`,
+  onion3: (str, content) => content.replace(':', '.onion:')
 }
 
 module.exports = (multiaddr, opts) => {
