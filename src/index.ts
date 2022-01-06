@@ -1,9 +1,15 @@
-const { Multiaddr } = require('multiaddr')
+import { Multiaddr } from '@multiformats/multiaddr'
 
-const reduceValue = (_, v) => v
-const tcpUri = (str, port, parts, opts) => {
+export interface MultiaddrToUriOpts {
+  assumeHttp?: boolean
+}
+
+interface Reducer { (str: string, content: string, i: number, parts: Part[], opts?: MultiaddrToUriOpts): string }
+
+const reduceValue: Reducer = (_, v) => v
+const tcpUri = (str: string, port: string, parts: Part[], opts?: MultiaddrToUriOpts) => {
   // return tcp when explicitly requested
-  if (opts && opts.assumeHttp === false) return `tcp://${str}:${port}`
+  if ((opts != null) && opts.assumeHttp === false) return `tcp://${str}:${port}`
   // check if tcp is the last protocol in multiaddr
   let protocol = 'tcp'
   let explicitPort = `:${port}`
@@ -16,7 +22,7 @@ const tcpUri = (str, port, parts, opts) => {
   return `${protocol}://${str}${explicitPort}`
 }
 
-const Reducers = {
+const Reducers: Record<string, Reducer> = {
   ip4: reduceValue,
   ip6: (str, content, i, parts) => (
     parts.length === 1 && parts[0].protocol === 'ip6'
@@ -43,18 +49,25 @@ const Reducers = {
   'p2p-webrtc-direct': str => `${str}/p2p-webrtc-direct`
 }
 
-module.exports = (multiaddr, opts) => {
+interface Part {
+  protocol: string
+  content: string
+}
+
+export function multiaddrToUri (multiaddr: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts) {
   const ma = new Multiaddr(multiaddr)
   const parts = multiaddr.toString().split('/').slice(1)
   return ma
     .tuples()
     .map(tuple => ({
-      protocol: parts.shift(),
-      content: tuple[1] ? parts.shift() : null
+      protocol: parts.shift() ?? '',
+      content: (tuple[1] != null) ? parts.shift() ?? '' : ''
     }))
-    .reduce((str, part, i, parts) => {
+    .reduce((str: string, part: Part, i: number, parts: Part[]) => {
       const reduce = Reducers[part.protocol]
-      if (!reduce) throw new Error(`Unsupported protocol ${part.protocol}`)
+      if (reduce == null) {
+        throw new Error(`Unsupported protocol ${part.protocol}`)
+      }
       return reduce(str, part.content, i, parts, opts)
     }, '')
 }
