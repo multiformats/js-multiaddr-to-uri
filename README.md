@@ -14,21 +14,21 @@
 ## Install
 
 ```sh
-npm install multiaddr-to-uri
+npm install @multiformats/multiaddr-to-uri
 ```
 
 ## Usage
 
 ```js
-const toUri = require('multiaddr-to-uri')
+import { multiaddrToUri } from '@multiformats/multiaddr-to-uri'
 
-console.log(toUri('/dnsaddr/protocol.ai/https'))
+console.log(multiaddrToUri('/dnsaddr/protocol.ai/https'))
 // -> https://protocol.ai
 
-console.log(toUri('/ip4/127.0.0.1/tcp/8080'))
+console.log(multiaddrToUri('/ip4/127.0.0.1/tcp/8080'))
 // -> http://127.0.0.1:8080
 
-console.log(toUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
+console.log(multiaddrToUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
 // -> tcp://127.0.0.1:8080
 ```
 
