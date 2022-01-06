@@ -1,10 +1,16 @@
-# multiaddr-to-uri
+# multiaddr-to-uri <!-- omit in toc -->
 
 [![Build Status](https://travis-ci.org/multiformats/js-multiaddr-to-uri.svg?branch=master)](https://travis-ci.org/multiformats/js-multiaddr-to-uri) [![dependencies Status](https://david-dm.org/multiformats/js-multiaddr-to-uri/status.svg)](https://david-dm.org/multiformats/js-multiaddr-to-uri) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 > Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io
 
+## Table of contents  <!-- omit in toc -->
+
+- [Install](#install)
+- [Usage](#usage)
+- [Contribute](#contribute)
+- [License](#license)
 ## Install
 
 ```sh
@@ -42,4 +48,4 @@ Feel free to dive in! [Open an issue](https://github.com/multiformats/js-multiad
 
 ## License
 
-[MIT](LICENSE) © Alan Shaw
+[Apache-2.0](LICENSE-APACHE) or [MIT](LICENSE-MIT)
