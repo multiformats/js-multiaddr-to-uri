@@ -1,4 +1,5 @@
-import { Multiaddr } from '@multiformats/multiaddr'
+import type { Multiaddr } from '@multiformats/multiaddr'
+import { multiaddr } from '@multiformats/multiaddr'
 
 export interface MultiaddrToUriOpts {
   assumeHttp?: boolean
@@ -54,9 +55,9 @@ interface Part {
   content: string
 }
 
-export function multiaddrToUri (multiaddr: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts) {
-  const ma = new Multiaddr(multiaddr)
-  const parts = multiaddr.toString().split('/').slice(1)
+export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts) {
+  const ma = multiaddr(input)
+  const parts = ma.toString().split('/').slice(1)
   return ma
     .tuples()
     .map(tuple => ({
