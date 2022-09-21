@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-import { expect } from 'aegir/utils/chai.js'
+import { expect } from 'aegir/chai'
 import { multiaddrToUri as toUri } from '../src/index.js'
 
 describe('multiaddr-to-uri', () => {

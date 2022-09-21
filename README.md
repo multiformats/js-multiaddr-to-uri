@@ -1,20 +1,23 @@
-# multiaddr-to-uri <!-- omit in toc -->
+# @multiformats/multiaddr-to-uri <!-- omit in toc -->
 
-[![Build Status](https://travis-ci.org/multiformats/js-multiaddr-to-uri.svg?branch=master)](https://travis-ci.org/multiformats/js-multiaddr-to-uri) [![dependencies Status](https://david-dm.org/multiformats/js-multiaddr-to-uri/status.svg)](https://david-dm.org/multiformats/js-multiaddr-to-uri) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![multiformats.io](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](http://multiformats.io)
+[![codecov](https://img.shields.io/codecov/c/github/multiformats/js-multiaddr-to-uri.svg?style=flat-square)](https://codecov.io/gh/multiformats/js-multiaddr-to-uri)
+[![CI](https://img.shields.io/github/workflow/status/multiformats/js-multiaddr-to-uri/test%20&%20maybe%20release/master?style=flat-square)](https://github.com/multiformats/js-multiaddr-to-uri/actions/workflows/js-test-and-release.yml)
 
+> Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> <http://ipfs.io>
 
-> Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io
-
-## Table of contents  <!-- omit in toc -->
+## Table of contents <!-- omit in toc -->
 
 - [Install](#install)
 - [Usage](#usage)
 - [Contribute](#contribute)
 - [License](#license)
+- [Contribute](#contribute-1)
+
 ## Install
 
-```sh
-npm install @multiformats/multiaddr-to-uri
+```console
+$ npm i @multiformats/multiaddr-to-uri
 ```
 
 ## Usage
@@ -34,13 +37,13 @@ console.log(multiaddrToUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
 
 Note:
 
-* When `/tcp` is the last (terminating) protocol HTTP is assumed by default (implicit `assumeHttp: true`)
-  * this means produced URIs will start with `http://` instead of `tcp://`
-  * passing `{ assumeHttp: false }` disables this behavior
-* Might be lossy - e.g. a DNSv6 multiaddr
-* Can throw if the passed multiaddr:
-    * is not a valid multiaddr
-    * is not supported as a URI e.g. circuit
+- When `/tcp` is the last (terminating) protocol HTTP is assumed by default (implicit `assumeHttp: true`)
+  - this means produced URIs will start with `http://` instead of `tcp://`
+  - passing `{ assumeHttp: false }` disables this behavior
+- Might be lossy - e.g. a DNSv6 multiaddr
+- Can throw if the passed multiaddr:
+  - is not a valid multiaddr
+  - is not supported as a URI e.g. circuit
 
 ## Contribute
 
@@ -48,4 +51,11 @@ Feel free to dive in! [Open an issue](https://github.com/multiformats/js-multiad
 
 ## License
 
-[Apache-2.0](LICENSE-APACHE) or [MIT](LICENSE-MIT)
+Licensed under either of
+
+- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+
+## Contribute
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

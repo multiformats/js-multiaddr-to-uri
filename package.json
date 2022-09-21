@@ -2,6 +2,25 @@
   "name": "@multiformats/multiaddr-to-uri",
   "version": "9.0.1",
   "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
+  "author": "Alan Shaw",
+  "license": "Apache-2.0 OR MIT",
+  "homepage": "https://github.com/multiformats/js-multiaddr-to-uri#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/multiformats/js-multiaddr-to-uri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/multiformats/js-multiaddr-to-uri/issues"
+  },
+  "keywords": [
+    "URL",
+    "multiaddr",
+    "toString"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "type": "module",
   "types": "./dist/src/index.d.ts",
   "files": [
@@ -12,6 +31,7 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js"
     }
   },
@@ -21,41 +41,6 @@
       "sourceType": "module"
     }
   },
-  "scripts": {
-    "lint": "aegir lint",
-    "dep-check": "aegir dep-check dist/src/**/*.js dist/test/**/*.js",
-    "build": "tsc",
-    "pretest": "npm run build",
-    "test": "aegir test -f ./dist/test/**/*.js",
-    "test:chrome": "npm run test -- -t browser",
-    "test:chrome-webworker": "npm run test -- -t webworker",
-    "test:firefox": "npm run test -- -t browser -- --browser firefox",
-    "test:firefox-webworker": "npm run test -- -t webworker -- --browser firefox",
-    "test:node": "npm run test -- -t node --cov",
-    "test:electron-main": "npm run test -- -t electron-main",
-    "release": "semantic-release"
-  },
-  "keywords": [
-    "multiaddr",
-    "toString",
-    "URL"
-  ],
-  "author": "Alan Shaw",
-  "license": "Apache-2.0 or MIT",
-  "devDependencies": {
-    "aegir": "^36.1.3"
-  },
-  "dependencies": {
-    "@multiformats/multiaddr": "^10.1.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/multiformats/js-multiaddr-to-uri.git"
-  },
-  "bugs": {
-    "url": "https://github.com/multiformats/js-multiaddr-to-uri/issues"
-  },
-  "homepage": "https://github.com/multiformats/js-multiaddr-to-uri#readme",
   "release": {
     "branches": [
       "master"
@@ -83,15 +68,15 @@
               "release": "patch"
             },
             {
-              "type": "chore",
-              "release": "patch"
-            },
-            {
               "type": "docs",
               "release": "patch"
             },
             {
               "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "deps",
               "release": "patch"
             },
             {
@@ -121,7 +106,11 @@
               },
               {
                 "type": "docs",
-                "section": "Trivial Changes"
+                "section": "Documentation"
+              },
+              {
+                "type": "deps",
+                "section": "Dependencies"
               },
               {
                 "type": "test",
@@ -136,5 +125,26 @@
       "@semantic-release/github",
       "@semantic-release/git"
     ]
+  },
+  "scripts": {
+    "clean": "aegir clean",
+    "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
+    "generate": "protons src/pb/peer.proto src/pb/tags.proto",
+    "build": "aegir build",
+    "test": "aegir test",
+    "test:chrome": "aegir test -t browser --cov",
+    "test:chrome-webworker": "aegir test -t webworker",
+    "test:firefox": "aegir test -t browser -- --browser firefox",
+    "test:firefox-webworker": "aegir test -t webworker -- --browser firefox",
+    "test:node": "aegir test -t node --cov",
+    "test:electron-main": "aegir test -t electron-main",
+    "release": "aegir release"
+  },
+  "dependencies": {
+    "@multiformats/multiaddr": "^10.1.1"
+  },
+  "devDependencies": {
+    "aegir": "^37.5.3"
   }
 }
