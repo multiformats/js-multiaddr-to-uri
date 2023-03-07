@@ -142,7 +142,7 @@
     "release": "aegir release"
   },
   "dependencies": {
-    "@multiformats/multiaddr": "^11.0.0"
+    "@multiformats/multiaddr": "../js-multiaddr/"
   },
   "devDependencies": {
     "aegir": "^37.5.3"
