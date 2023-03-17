@@ -8,7 +8,7 @@ export interface MultiaddrToUriOpts {
 interface Reducer { (str: string, content: string, i: number, parts: Part[], opts?: MultiaddrToUriOpts): string }
 
 const reduceValue: Reducer = (_, v) => v
-const tcpUri = (str: string, port: string, parts: Part[], opts?: MultiaddrToUriOpts) => {
+const tcpUri = (str: string, port: string, parts: Part[], opts?: MultiaddrToUriOpts): string => {
   // return tcp when explicitly requested
   if ((opts != null) && opts.assumeHttp === false) return `tcp://${str}:${port}`
   // check if tcp is the last protocol in multiaddr
@@ -55,7 +55,7 @@ interface Part {
   content: string
 }
 
-export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts) {
+export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts): string {
   const ma = multiaddr(input)
   const parts = ma.toString().split('/').slice(1)
   return ma
