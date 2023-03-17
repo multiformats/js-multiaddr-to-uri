@@ -39,7 +39,7 @@ function interpretNext (headProtoCode: number, headProtoVal: string, restMa: Str
   return restVal
 }
 
-const interpreters: {[key: string]: Interpreter} = {
+const interpreters: Record<string, Interpreter> = {
   ip4: (value: string, restMa: StringTuple[]) => value,
   ip6: (value: string, restMa: StringTuple[]) => {
     if (restMa.length === 0) {
@@ -171,7 +171,7 @@ const interpreters: {[key: string]: Interpreter} = {
   }
 }
 
-export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts) {
+export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts): string {
   const ma = multiaddr(input)
   const parts = ma.stringTuples()
   const head = parts.pop()
