@@ -179,7 +179,14 @@ export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: M
     throw new Error('Unexpected end of multiaddr')
   }
 
-  let uri = interpreters[protocols(head[0]).name](head[1] ?? '', parts)
+  const protocol = protocols(head[0])
+  const interpreter = interpreters[protocol.name]
+
+  if (interpreter == null) {
+    throw new Error(`No interpreter found for ${protocol.name}`)
+  }
+
+  let uri = interpreter(head[1] ?? '', parts)
   if (opts?.assumeHttp !== false && head[0] === protocols('tcp').code) {
     // If rightmost proto is tcp, we assume http here
     uri = uri.replace('tcp://', 'http://')
