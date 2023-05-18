@@ -1,6 +1,6 @@
 {
   "name": "@multiformats/multiaddr-to-uri",
-  "version": "9.0.3",
+  "version": "9.0.4",
   "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
   "author": "Alan Shaw",
   "license": "Apache-2.0 OR MIT",
@@ -143,7 +143,7 @@
     "docs": "aegir docs"
   },
   "dependencies": {
-    "@multiformats/multiaddr": "^11.0.0"
+    "@multiformats/multiaddr": "^12.0.0"
   },
   "devDependencies": {
     "aegir": "^38.1.7"

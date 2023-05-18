@@ -1,3 +1,10 @@
+## [9.0.4](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.3...v9.0.4) (2023-03-20)
+
+
+### Dependencies
+
+* bump @multiformats/multiaddr from 11.6.1 to 12.0.0 ([#123](https://github.com/multiformats/js-multiaddr-to-uri/issues/123)) ([dcba0c8](https://github.com/multiformats/js-multiaddr-to-uri/commit/dcba0c8f4bc1079fbb138f79d88b891d3976de75))
+
 ## [9.0.3](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.2...v9.0.3) (2023-03-17)
 
 
