@@ -1,5 +1,5 @@
-import type { Multiaddr } from '@multiformats/multiaddr'
 import { multiaddr } from '@multiformats/multiaddr'
+import type { Multiaddr } from '@multiformats/multiaddr'
 
 export interface MultiaddrToUriOpts {
   assumeHttp?: boolean
