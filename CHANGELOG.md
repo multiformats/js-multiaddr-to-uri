@@ -1,3 +1,10 @@
+## [9.0.7](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.6...v9.0.7) (2023-05-19)
+
+
+### Bug Fixes
+
+* support /dns addresses ([#129](https://github.com/multiformats/js-multiaddr-to-uri/issues/129)) ([c852bfc](https://github.com/multiformats/js-multiaddr-to-uri/commit/c852bfca681112246483a8c98d46ad1d1384ba1c)), closes [#9](https://github.com/multiformats/js-multiaddr-to-uri/issues/9)
+
 ## [9.0.6](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.5...v9.0.6) (2023-05-19)
 
 
