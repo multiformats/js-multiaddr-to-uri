@@ -16,6 +16,7 @@ describe('multiaddr-to-uri', () => {
       ['/ip4/0.0.7.6/udp/1234', 'udp://0.0.7.6:1234'],
       ['/ip6/::/udp/0', 'udp://[::]:0'],
       ['/dns/a.com/tcp/1234', 'http://a.com:1234'],
+      ['/dns/a.com', 'a.com'],
       ['/dnsaddr/ipfs.io', 'ipfs.io'],
       ['/dns4/ipfs.io', 'ipfs.io'],
       ['/dns4/libp2p.io', 'libp2p.io'],
