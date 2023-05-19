@@ -11,6 +11,8 @@ describe('multiaddr-to-uri', () => {
       ['/ip6/fc00::/http', 'http://[fc00::]'],
       ['/ip4/0.0.7.6/tcp/1234/http', 'http://0.0.7.6:1234'],
       ['/ip4/0.0.7.6/tcp/1234/https', 'https://0.0.7.6:1234'],
+      ['/ip4/0.0.7.6/tcp/1234/tls/http', 'https://0.0.7.6:1234'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http', 'https://ipfs.io'],
       ['/ip4/0.0.7.6/udp/1234', 'udp://0.0.7.6:1234'],
       ['/ip6/::/udp/0', 'udp://[::]:0'],
       ['/dnsaddr/ipfs.io', 'ipfs.io'],
@@ -25,6 +27,8 @@ describe('multiaddr-to-uri', () => {
       ['/ip4/1.2.3.4/tcp/3456/ws', 'ws://1.2.3.4:3456'],
       ['/ip6/::/tcp/0/ws', 'ws://[::]:0'],
       ['/dnsaddr/ipfs.io/wss', 'wss://ipfs.io'],
+      ['/dnsaddr/ipfs.io/tls/ws', 'wss://ipfs.io'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/ws', 'wss://ipfs.io'],
       ['/ip4/1.2.3.4/tcp/3456/wss', 'wss://1.2.3.4:3456'],
       ['/ip6/::/tcp/0/wss', 'wss://[::]:0'],
       [
