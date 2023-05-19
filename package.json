@@ -1,6 +1,6 @@
 {
   "name": "@multiformats/multiaddr-to-uri",
-  "version": "9.0.5",
+  "version": "9.0.6",
   "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
   "author": "Alan Shaw",
   "license": "Apache-2.0 OR MIT",
