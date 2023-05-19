@@ -5,6 +5,14 @@ export interface MultiaddrToUriOpts {
   assumeHttp?: boolean
 }
 
+const ASSUME_HTTP_CODES = [
+  protocols('tcp').code,
+  protocols('dns').code,
+  protocols('dnsaddr').code,
+  protocols('dns4').code,
+  protocols('dns6').code
+]
+
 interface Interpreter { (value: string, ma: StringTuple[]): string }
 
 function extractSNI (ma: StringTuple[]): string | null {
@@ -188,15 +196,25 @@ export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: M
   }
 
   let uri = interpreter(head[1] ?? '', parts)
-  if (opts?.assumeHttp !== false && head[0] === protocols('tcp').code) {
-    // If rightmost proto is tcp, we assume http here
-    uri = uri.replace('tcp://', 'http://')
-    if (head[1] === '443' || head[1] === '80') {
-      if (head[1] === '443') {
-        uri = uri.replace('http://', 'https://')
-      }
-      // Drop the port
-      uri = uri.substring(0, uri.lastIndexOf(':'))
+
+  if (opts?.assumeHttp !== false && ASSUME_HTTP_CODES.includes(head[0])) {
+    // strip any declared protocol
+    uri = uri.replace(/^.*:\/\//, '')
+
+    if (head[1] === '443') {
+      uri = `https://${uri}`
+    } else {
+      uri = `http://${uri}`
+    }
+  }
+
+  if (uri.startsWith('http://') || uri.startsWith('https://')) {
+    // this will strip default ports while keeping paths intact
+    uri = new URL(uri).toString()
+
+    // strip trailing slash, e.g. http://127.0.0.1/ -> http://127.0.0.1
+    if (uri.endsWith('/')) {
+      uri = uri.substring(0, uri.length - 1)
     }
   }
 
