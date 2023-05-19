@@ -1,5 +1,5 @@
-import type { Multiaddr, StringTuple } from '@multiformats/multiaddr'
 import { multiaddr, protocols } from '@multiformats/multiaddr'
+import type { Multiaddr, StringTuple } from '@multiformats/multiaddr'
 
 export interface MultiaddrToUriOpts {
   assumeHttp?: boolean
