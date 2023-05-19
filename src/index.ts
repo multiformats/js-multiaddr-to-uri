@@ -64,6 +64,7 @@ const interpreters: Record<string, Interpreter> = {
   dnsaddr: (value: string, restMa: StringTuple[]) => value,
   dns4: (value: string, restMa: StringTuple[]) => value,
   dns6: (value: string, restMa: StringTuple[]) => value,
+  dns: (value: string, restMa: StringTuple[]) => value,
   ipfs: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
     if (tailProto === undefined) {
