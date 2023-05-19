@@ -1,3 +1,10 @@
+## [9.0.5](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.4...v9.0.5) (2023-05-19)
+
+
+### Bug Fixes
+
+* Rewrite to interpret multiaddr from right to left ([#120](https://github.com/multiformats/js-multiaddr-to-uri/issues/120)) ([681d4e3](https://github.com/multiformats/js-multiaddr-to-uri/commit/681d4e3f07b7e721e3a2eccc9905e76110f4dfbb))
+
 ## [9.0.4](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.3...v9.0.4) (2023-03-20)
 
 
