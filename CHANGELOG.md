@@ -1,3 +1,16 @@
+## [9.0.8](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.7...v9.0.8) (2024-02-05)
+
+
+### Trivial Changes
+
+* add or force update .github/workflows/js-test-and-release.yml ([#137](https://github.com/multiformats/js-multiaddr-to-uri/issues/137)) ([1b886c6](https://github.com/multiformats/js-multiaddr-to-uri/commit/1b886c6d05105fbb8311a5d8fd0c2fc54bc8d911))
+* delete templates [skip ci] ([#136](https://github.com/multiformats/js-multiaddr-to-uri/issues/136)) ([92fae51](https://github.com/multiformats/js-multiaddr-to-uri/commit/92fae51fe27f86a10ef5a0e013366f97715b30d5))
+
+
+### Dependencies
+
+* **dev:** bump aegir from 39.0.13 to 41.0.5 ([#145](https://github.com/multiformats/js-multiaddr-to-uri/issues/145)) ([a90dca4](https://github.com/multiformats/js-multiaddr-to-uri/commit/a90dca4b412ef38eca54bf58bf727eeb357a83ed))
+
 ## [9.0.7](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.6...v9.0.7) (2023-05-19)
 
 
