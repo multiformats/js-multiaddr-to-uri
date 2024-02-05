@@ -1,3 +1,15 @@
+## [10.0.1](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.0.0...v10.0.1) (2024-02-05)
+
+
+### Trivial Changes
+
+* rename master to main ([81d94e5](https://github.com/multiformats/js-multiaddr-to-uri/commit/81d94e52582ecaeeab5513ffa68ad305f9e73b47))
+
+
+### Documentation
+
+* update readme ([3f42a05](https://github.com/multiformats/js-multiaddr-to-uri/commit/3f42a05e56fa7062dbee777bec00fb5ee136b2e5))
+
 ## [10.0.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.8...v10.0.0) (2024-02-05)
 
 
