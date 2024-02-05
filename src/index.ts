@@ -1,3 +1,34 @@
+/**
+ * @packageDocumentation
+ *
+ * This module allows easy conversion of Multiaddrs to URLs.
+ *
+ * @example Converting multiaddrs to URLs
+ *
+ * ```js
+ * import { multiaddrToUri } from '@multiformats/multiaddr-to-uri'
+ *
+ * console.log(multiaddrToUri('/dnsaddr/protocol.ai/https'))
+ * // -> https://protocol.ai
+ *
+ * console.log(multiaddrToUri('/ip4/127.0.0.1/tcp/8080'))
+ * // -> http://127.0.0.1:8080
+ *
+ * console.log(multiaddrToUri('/ip4/127.0.0.1/tcp/8080', { assumeHttp: false }))
+ * // -> tcp://127.0.0.1:8080
+ * ```
+ *
+ * Note:
+ *
+ * - When `/tcp` is the last (terminating) protocol HTTP is assumed by default (implicit `assumeHttp: true`)
+ *   - this means produced URIs will start with `http://` instead of `tcp://`
+ *   - passing `{ assumeHttp: false }` disables this behavior
+ * - Might be lossy - e.g. a DNSv6 multiaddr
+ * - Can throw if the passed multiaddr:
+ *   - is not a valid multiaddr
+ *   - is not supported as a URI e.g. circuit
+ */
+
 import { multiaddr, protocols } from '@multiformats/multiaddr'
 import type { Multiaddr, StringTuple } from '@multiformats/multiaddr'
 

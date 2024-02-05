@@ -1,7 +1,7 @@
 {
   "name": "@multiformats/multiaddr-to-uri",
   "version": "9.0.7",
-  "description": "Convert a Multiaddr to a URI /dnsaddr/ipfs.io/http -> http://ipfs.io",
+  "description": "Convert a Multiaddr to a URI",
   "author": "Alan Shaw",
   "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/multiformats/js-multiaddr-to-uri#readme",
@@ -12,15 +12,15 @@
   "bugs": {
     "url": "https://github.com/multiformats/js-multiaddr-to-uri/issues"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "keywords": [
     "URL",
     "multiaddr",
     "toString"
   ],
-  "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
-  },
   "type": "module",
   "types": "./dist/src/index.d.ts",
   "files": [
@@ -38,6 +38,7 @@
   "eslintConfig": {
     "extends": "ipfs",
     "parserOptions": {
+      "project": true,
       "sourceType": "module"
     }
   },
@@ -146,6 +147,6 @@
     "@multiformats/multiaddr": "^12.0.0"
   },
   "devDependencies": {
-    "aegir": "^39.0.7"
+    "aegir": "^42.2.2"
   }
 }
