@@ -1,9 +1,9 @@
 /**
  * @packageDocumentation
  *
- * This module allows easy conversion of Multiaddrs to URLs.
+ * This module allows easy conversion of Multiaddrs to string URIs.
  *
- * @example Converting multiaddrs to URLs
+ * @example Converting multiaddrs to string URIs
  *
  * ```js
  * import { multiaddrToUri } from '@multiformats/multiaddr-to-uri'
