@@ -1,3 +1,14 @@
+## [10.0.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.8...v10.0.0) (2024-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* dns addresses previously returned domain names, now they return URLs
+
+### Bug Fixes
+
+* always return a URI for DNS addresses ([#130](https://github.com/multiformats/js-multiaddr-to-uri/issues/130)) ([dae8350](https://github.com/multiformats/js-multiaddr-to-uri/commit/dae835053d4e9e0f4ce4dab57e98b4d996999653)), closes [#8](https://github.com/multiformats/js-multiaddr-to-uri/issues/8)
+
 ## [9.0.8](https://github.com/multiformats/js-multiaddr-to-uri/compare/v9.0.7...v9.0.8) (2024-02-05)
 
 
