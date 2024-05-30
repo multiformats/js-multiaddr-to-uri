@@ -13,6 +13,7 @@ describe('multiaddr-to-uri', () => {
       ['/ip4/0.0.7.6/tcp/1234/https', 'https://0.0.7.6:1234'],
       ['/ip4/0.0.7.6/tcp/1234/tls/http', 'https://0.0.7.6:1234'],
       ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http', 'https://ipfs.io'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http/http-path/foo%2fbar', 'https://ipfs.io/foo/bar'],
       ['/ip4/0.0.7.6/udp/1234', 'udp://0.0.7.6:1234'],
       ['/ip6/::/udp/0', 'udp://[::]:0'],
       ['/dns/a.com/tcp/1234', 'http://a.com:1234'],
@@ -84,6 +85,10 @@ describe('multiaddr-to-uri', () => {
       [
         '/ip4/1.2.3.4/tcp/3456/ipfs/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
         'tcp://1.2.3.4:3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK'
+      ],
+      [
+        '/ip4/1.2.3.4/tcp/3456/http/http-path/foo%2fbar',
+        'http://1.2.3.4:3456/foo/bar'
       ],
       [
         '/ip4/1.2.3.4/tcp/3456/p2p/QmcNwyju7SWoizsAuf6kjaaRoxe762ovsT3hz6qt3xxcsK',
