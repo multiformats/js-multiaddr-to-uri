@@ -1,3 +1,15 @@
+## [10.1.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.0.1...v10.1.0) (2024-06-06)
+
+
+### Features
+
+* add support for http-path ([#148](https://github.com/multiformats/js-multiaddr-to-uri/issues/148)) ([65aa537](https://github.com/multiformats/js-multiaddr-to-uri/commit/65aa5376e45cdec80e4bcc8008cb9c63abd1db25))
+
+
+### Dependencies
+
+* **dev:** bump aegir from 42.2.11 to 43.0.1 ([#147](https://github.com/multiformats/js-multiaddr-to-uri/issues/147)) ([266001f](https://github.com/multiformats/js-multiaddr-to-uri/commit/266001f8f6e56a542eb7225f1fb95b48199aeebf))
+
 ## [10.0.1](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.0.0...v10.0.1) (2024-02-05)
 
 
