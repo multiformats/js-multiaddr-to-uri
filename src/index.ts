@@ -134,6 +134,15 @@ const interpreters: Record<string, Interpreter> = {
     baseVal = baseVal.replace('tcp://', '')
     return `${protocol}${baseVal}`
   },
+  'http-path': (value: string, restMa: StringTuple[]) => {
+    const tailProto = restMa.pop()
+    if (tailProto === undefined) {
+      throw new Error('Unexpected end of multiaddr')
+    }
+    const baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    const decodedValue = decodeURIComponent(value)
+    return `${baseVal}/${decodedValue}`
+  },
   tls: (value: string, restMa: StringTuple[]) => {
     // Noop, the parent context knows that it's tls. We don't need to do
     // anything here
