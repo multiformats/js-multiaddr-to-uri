@@ -12,8 +12,10 @@ describe('multiaddr-to-uri', () => {
       ['/ip4/0.0.7.6/tcp/1234/http', 'http://0.0.7.6:1234'],
       ['/ip4/0.0.7.6/tcp/1234/https', 'https://0.0.7.6:1234'],
       ['/ip4/0.0.7.6/tcp/1234/tls/http', 'https://0.0.7.6:1234'],
-      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http', 'https://ipfs.io'],
-      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http/http-path/foo%2fbar', 'https://ipfs.io/foo/bar'],
+      ['/ip4/1.2.3.4/tcp/443/tls/sni/ipfs.io/http', 'https://ipfs.io'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http', 'https://ipfs.io:1234'],
+      ['/ip4/1.2.3.4/tcp/443/tls/sni/ipfs.io/http/http-path/foo%2fbar', 'https://ipfs.io/foo/bar'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/http/http-path/foo%2fbar', 'https://ipfs.io:1234/foo/bar'],
       ['/ip4/0.0.7.6/udp/1234', 'udp://0.0.7.6:1234'],
       ['/ip6/::/udp/0', 'udp://[::]:0'],
       ['/dns/a.com/tcp/1234', 'http://a.com:1234'],
@@ -35,7 +37,8 @@ describe('multiaddr-to-uri', () => {
       ['/ip6/::/tcp/0/ws', 'ws://[::]:0'],
       ['/dnsaddr/ipfs.io/wss', 'wss://ipfs.io'],
       ['/dnsaddr/ipfs.io/tls/ws', 'wss://ipfs.io'],
-      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/ws', 'wss://ipfs.io'],
+      ['/ip4/1.2.3.4/tcp/443/tls/sni/ipfs.io/ws', 'wss://ipfs.io'],
+      ['/ip4/1.2.3.4/tcp/1234/tls/sni/ipfs.io/ws', 'wss://ipfs.io:1234'],
       ['/ip4/1.2.3.4/tcp/3456/wss', 'wss://1.2.3.4:3456'],
       ['/ip6/::/tcp/0/wss', 'wss://[::]:0'],
       [
@@ -56,7 +59,7 @@ describe('multiaddr-to-uri', () => {
       ],
       [
         '/dns4/wrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star/ipfs/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79',
-        'wss://wrtc-star.discovery.libp2p.io:443/p2p-webrtc-star/p2p/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79'
+        'wss://wrtc-star.discovery.libp2p.io/p2p-webrtc-star/p2p/QmTysQQiTGMdfRsDQp516oZ9bR3FiSCDnicUnqny2q1d79'
       ],
       ['/ip4/1.2.3.4/tcp/3456/http/p2p-webrtc-direct', 'http://1.2.3.4:3456/p2p-webrtc-direct'],
       ['/ip6/::/tcp/0/http/p2p-webrtc-direct', 'http://[::]:0/p2p-webrtc-direct'],
@@ -72,7 +75,7 @@ describe('multiaddr-to-uri', () => {
       ],
       [
         '/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star/ipfs/QmP3vadpN9dqZ7j6KtmwP5Y4prg7XqdS7ixgZMWtXxBAbp',
-        'wss://ws-star.discovery.libp2p.io:443/p2p-websocket-star/p2p/QmP3vadpN9dqZ7j6KtmwP5Y4prg7XqdS7ixgZMWtXxBAbp'
+        'wss://ws-star.discovery.libp2p.io/p2p-websocket-star/p2p/QmP3vadpN9dqZ7j6KtmwP5Y4prg7XqdS7ixgZMWtXxBAbp'
       ],
       [
         '/ip4/127.0.0.1/tcp/20008/ws/ipfs/QmUjNmr8TgJCn1Ao7DvMy4cjoZU15b9bwSCBLE3vwXiwgj',

@@ -46,20 +46,35 @@ const ASSUME_HTTP_CODES = [
 
 interface Interpreter { (value: string, ma: StringTuple[]): string }
 
-function extractSNI (ma: StringTuple[]): string | null {
-  let sniProtoCode: number
-  try {
-    sniProtoCode = protocols('sni').code
-  } catch (e) {
-    // No SNI protocol in multiaddr
-    return null
+function extractSNI (ma: StringTuple[]): string | undefined {
+  return extractTuple('sni', ma)?.[1]
+}
+
+function extractPort (ma: StringTuple[]): string {
+  const port = extractTuple('tcp', ma)?.[1]
+
+  if (port == null) {
+    return ''
   }
+
+  return `:${port}`
+}
+
+function extractTuple (name: string, ma: StringTuple[]): StringTuple | undefined {
+  let code: number
+
+  try {
+    code = protocols(name).code
+  } catch (e) {
+    // No support for protocol in multiaddr
+    return
+  }
+
   for (const [proto, value] of ma) {
-    if (proto === sniProtoCode && value !== undefined) {
-      return value
+    if (proto === code && value != null) {
+      return [proto, value]
     }
   }
-  return null
 }
 
 function hasTLS (ma: StringTuple[]): boolean {
@@ -68,7 +83,7 @@ function hasTLS (ma: StringTuple[]): boolean {
 
 function interpretNext (headProtoCode: number, headProtoVal: string, restMa: StringTuple[]): string {
   const interpreter = interpreters[protocols(headProtoCode).name]
-  if (interpreter === undefined) {
+  if (interpreter == null) {
     throw new Error(`Can't interpret protocol ${protocols(headProtoCode).name}`)
   }
   const restVal = interpreter(headProtoVal, restMa)
@@ -88,14 +103,14 @@ const interpreters: Record<string, Interpreter> = {
   },
   tcp: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `tcp://${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}:${value}`
   },
   udp: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `udp://${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}:${value}`
@@ -106,14 +121,14 @@ const interpreters: Record<string, Interpreter> = {
   dns: (value: string, restMa: StringTuple[]) => value,
   ipfs: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/ipfs/${value}`
   },
   p2p: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p/${value}`
@@ -121,12 +136,13 @@ const interpreters: Record<string, Interpreter> = {
   http: (value: string, restMa: StringTuple[]) => {
     const maHasTLS = hasTLS(restMa)
     const sni = extractSNI(restMa)
-    if (maHasTLS && sni !== null) {
-      return `https://${sni}`
+    const port = extractPort(restMa)
+    if (maHasTLS && sni != null) {
+      return `https://${sni}${port}`
     }
     const protocol = maHasTLS ? 'https://' : 'http://'
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -136,7 +152,7 @@ const interpreters: Record<string, Interpreter> = {
   },
   'http-path': (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     const baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -147,7 +163,7 @@ const interpreters: Record<string, Interpreter> = {
     // Noop, the parent context knows that it's tls. We don't need to do
     // anything here
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -156,14 +172,14 @@ const interpreters: Record<string, Interpreter> = {
     // Noop, the parent context uses the sni information, we don't need to do
     // anything here
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
   },
   https: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -174,12 +190,13 @@ const interpreters: Record<string, Interpreter> = {
   ws: (value: string, restMa: StringTuple[]) => {
     const maHasTLS = hasTLS(restMa)
     const sni = extractSNI(restMa)
-    if (maHasTLS && sni !== null) {
-      return `wss://${sni}`
+    const port = extractPort(restMa)
+    if (maHasTLS && sni != null) {
+      return `wss://${sni}${port}`
     }
     const protocol = maHasTLS ? 'wss://' : 'ws://'
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -189,7 +206,7 @@ const interpreters: Record<string, Interpreter> = {
   },
   wss: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
@@ -199,21 +216,21 @@ const interpreters: Record<string, Interpreter> = {
   },
   'p2p-websocket-star': (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-websocket-star`
   },
   'p2p-webrtc-star': (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-webrtc-star`
   },
   'p2p-webrtc-direct': (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
-    if (tailProto === undefined) {
+    if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
     return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-webrtc-direct`
@@ -224,7 +241,7 @@ export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: M
   const ma = multiaddr(input)
   const parts = ma.stringTuples()
   const head = parts.pop()
-  if (head === undefined) {
+  if (head == null) {
     throw new Error('Unexpected end of multiaddr')
   }
 
@@ -248,7 +265,7 @@ export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: M
     }
   }
 
-  if (uri.startsWith('http://') || uri.startsWith('https://')) {
+  if (uri.startsWith('http://') || uri.startsWith('https://') || uri.startsWith('ws://') || uri.startsWith('wss://')) {
     // this will strip default ports while keeping paths intact
     uri = new URL(uri).toString()
 
