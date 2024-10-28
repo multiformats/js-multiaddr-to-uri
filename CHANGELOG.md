@@ -1,3 +1,9 @@
+## [10.1.2](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.1.1...v10.1.2) (2024-10-28)
+
+### Bug Fixes
+
+* handle ports in multiaddrs with SNI tuples ([#154](https://github.com/multiformats/js-multiaddr-to-uri/issues/154)) ([9fd5bdb](https://github.com/multiformats/js-multiaddr-to-uri/commit/9fd5bdbd74f63e61109fe7183bf75f8c69aa357a))
+
 ## [10.1.1](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.1.0...v10.1.1) (2024-10-26)
 
 ### Dependencies
