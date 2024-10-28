@@ -124,14 +124,14 @@ const interpreters: Record<string, Interpreter> = {
     if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/ipfs/${value}`
+    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}`
   },
   p2p: (value: string, restMa: StringTuple[]) => {
     const tailProto = restMa.pop()
     if (tailProto == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p/${value}`
+    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}`
   },
   http: (value: string, restMa: StringTuple[]) => {
     const maHasTLS = hasTLS(restMa)
@@ -213,27 +213,6 @@ const interpreters: Record<string, Interpreter> = {
     // We are reinterpreting the base as http, so we need to remove the tcp:// if it's there
     baseVal = baseVal.replace('tcp://', '')
     return `wss://${baseVal}`
-  },
-  'p2p-websocket-star': (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
-      throw new Error('Unexpected end of multiaddr')
-    }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-websocket-star`
-  },
-  'p2p-webrtc-star': (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
-      throw new Error('Unexpected end of multiaddr')
-    }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-webrtc-star`
-  },
-  'p2p-webrtc-direct': (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
-      throw new Error('Unexpected end of multiaddr')
-    }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}/p2p-webrtc-direct`
   }
 }
 
