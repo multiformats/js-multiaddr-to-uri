@@ -1,3 +1,17 @@
+## [11.0.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.1.2...v11.0.0) (2024-11-08)
+
+### ⚠ BREAKING CHANGES
+
+* p2p-webrtc-direct/p2p-websocket-star support has been removed
+
+### Bug Fixes
+
+* remove deprecated transports and do not append peer ids ([#155](https://github.com/multiformats/js-multiaddr-to-uri/issues/155)) ([161329c](https://github.com/multiformats/js-multiaddr-to-uri/commit/161329ca991cf967a60762b41535e16d0282a70b))
+
+### Dependencies
+
+* **dev:** bump aegir from 44.1.4 to 45.0.1 ([#156](https://github.com/multiformats/js-multiaddr-to-uri/issues/156)) ([b82d7c0](https://github.com/multiformats/js-multiaddr-to-uri/commit/b82d7c0133abf5fe63bfdba1a6cc37aab61fc3ca))
+
 ## [10.1.2](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.1.1...v10.1.2) (2024-10-28)
 
 ### Bug Fixes
