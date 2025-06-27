@@ -1,3 +1,9 @@
+## [11.0.1](https://github.com/multiformats/js-multiaddr-to-uri/compare/v11.0.0...v11.0.1) (2025-06-27)
+
+### Bug Fixes
+
+* refactor to not use deprecated multiaddr functions ([#168](https://github.com/multiformats/js-multiaddr-to-uri/issues/168)) ([a0f1751](https://github.com/multiformats/js-multiaddr-to-uri/commit/a0f1751e6f24fb1997814816138347feec16432d))
+
 ## [11.0.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v10.1.2...v11.0.0) (2024-11-08)
 
 ### ⚠ BREAKING CHANGES
