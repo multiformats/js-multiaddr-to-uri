@@ -59,7 +59,9 @@ describe('multiaddr-to-uri', () => {
       ]
     ]
 
-    data.forEach(d => expect(toUri(d[0])).to.equal(d[1]))
+    data.forEach(d => {
+      expect(toUri(d[0])).to.equal(d[1])
+    })
   })
 
   it('should convert multiaddr to http(s):// URI when implicit { assumeHttp: true }', () => {
