@@ -29,29 +29,31 @@
  *   - is not supported as a URI e.g. circuit
  */
 
-import { multiaddr, protocols } from '@multiformats/multiaddr'
-import type { Multiaddr, StringTuple } from '@multiformats/multiaddr'
+import { CODE_TCP, CODE_DNS, CODE_DNS4, CODE_DNS6, CODE_DNSADDR, multiaddr, CODE_TLS, CODE_IP6 } from '@multiformats/multiaddr'
+import type { Component, Multiaddr } from '@multiformats/multiaddr'
 
 export interface MultiaddrToUriOpts {
   assumeHttp?: boolean
 }
 
 const ASSUME_HTTP_CODES = [
-  protocols('tcp').code,
-  protocols('dns').code,
-  protocols('dnsaddr').code,
-  protocols('dns4').code,
-  protocols('dns6').code
+  CODE_TCP,
+  CODE_DNS,
+  CODE_DNSADDR,
+  CODE_DNS4,
+  CODE_DNS6
 ]
 
-interface Interpreter { (value: string, ma: StringTuple[]): string }
-
-function extractSNI (ma: StringTuple[]): string | undefined {
-  return extractTuple('sni', ma)?.[1]
+interface Interpreter {
+  (head: Component, rest: Component[]): string | undefined
 }
 
-function extractPort (ma: StringTuple[]): string {
-  const port = extractTuple('tcp', ma)?.[1]
+function extractSNI (ma: Component[]): string | undefined {
+  return extractTuple('sni', ma)?.value
+}
+
+function extractPort (ma: Component[]): string {
+  const port = extractTuple('tcp', ma)?.value
 
   if (port == null) {
     return ''
@@ -60,184 +62,170 @@ function extractPort (ma: StringTuple[]): string {
   return `:${port}`
 }
 
-function extractTuple (name: string, ma: StringTuple[]): StringTuple | undefined {
-  let code: number
-
-  try {
-    code = protocols(name).code
-  } catch (e) {
-    // No support for protocol in multiaddr
-    return
-  }
-
-  for (const [proto, value] of ma) {
-    if (proto === code && value != null) {
-      return [proto, value]
-    }
-  }
+function extractTuple (name: string, ma: Component[]): Component | undefined {
+  return ma.find(component => component.name === name)
 }
 
-function hasTLS (ma: StringTuple[]): boolean {
-  return ma.some(([proto, _]) => proto === protocols('tls').code)
+function hasTLS (ma: Component[]): boolean {
+  return ma.some(({ code }) => code === CODE_TLS)
 }
 
-function interpretNext (headProtoCode: number, headProtoVal: string, restMa: StringTuple[]): string {
-  const interpreter = interpreters[protocols(headProtoCode).name]
+function interpretNext (head: Component, rest: Component[]): string | undefined {
+  const interpreter = interpreters[head.name]
   if (interpreter == null) {
-    throw new Error(`Can't interpret protocol ${protocols(headProtoCode).name}`)
+    throw new Error(`Can't interpret protocol ${head.name}`)
   }
-  const restVal = interpreter(headProtoVal, restMa)
-  if (headProtoCode === protocols('ip6').code) {
+  const restVal = interpreter(head, rest)
+  if (head.code === CODE_IP6) {
     return `[${restVal}]`
   }
   return restVal
 }
 
 const interpreters: Record<string, Interpreter> = {
-  ip4: (value: string, restMa: StringTuple[]) => value,
-  ip6: (value: string, restMa: StringTuple[]) => {
-    if (restMa.length === 0) {
-      return value
+  ip4: (head, rest) => head.value,
+  ip6: (head, rest) => {
+    if (rest.length === 0) {
+      return head.value
     }
-    return `[${value}]`
+    return `[${head.value}]`
   },
-  tcp: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  tcp: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `tcp://${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}:${value}`
+    return `tcp://${interpretNext(tail, rest)}:${head.value}`
   },
-  udp: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  udp: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `udp://${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}:${value}`
+    return `udp://${interpretNext(tail, rest)}:${head.value}`
   },
-  dnsaddr: (value: string, restMa: StringTuple[]) => value,
-  dns4: (value: string, restMa: StringTuple[]) => value,
-  dns6: (value: string, restMa: StringTuple[]) => value,
-  dns: (value: string, restMa: StringTuple[]) => value,
-  ipfs: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  dnsaddr: (head, rest) => head.value,
+  dns4: (head, rest) => head.value,
+  dns6: (head, rest) => head.value,
+  dns: (head, rest) => head.value,
+  ipfs: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}`
+    return `${interpretNext(tail, rest)}`
   },
-  p2p: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  p2p: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return `${interpretNext(tailProto[0], tailProto[1] ?? '', restMa)}`
+    return `${interpretNext(tail, rest)}`
   },
-  http: (value: string, restMa: StringTuple[]) => {
-    const maHasTLS = hasTLS(restMa)
-    const sni = extractSNI(restMa)
-    const port = extractPort(restMa)
+  http: (head, rest) => {
+    const maHasTLS = hasTLS(rest)
+    const sni = extractSNI(rest)
+    const port = extractPort(rest)
     if (maHasTLS && sni != null) {
       return `https://${sni}${port}`
     }
     const protocol = maHasTLS ? 'https://' : 'http://'
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    let baseVal = interpretNext(tail, rest)
     // We are reinterpreting the base as http, so we need to remove the tcp:// if it's there
-    baseVal = baseVal.replace('tcp://', '')
+    baseVal = baseVal?.replace('tcp://', '')
     return `${protocol}${baseVal}`
   },
-  'http-path': (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  'http-path': (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    const baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
-    const decodedValue = decodeURIComponent(value)
-    return `${baseVal}/${decodedValue}`
+    const baseVal = interpretNext(tail, rest)
+    const decodedValue = decodeURIComponent(head.value ?? '')
+    return `${baseVal}${decodedValue}`
   },
-  tls: (value: string, restMa: StringTuple[]) => {
+  tls: (head, rest) => {
     // Noop, the parent context knows that it's tls. We don't need to do
     // anything here
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    return interpretNext(tail, rest)
   },
-  sni: (value: string, restMa: StringTuple[]) => {
+  sni: (head, rest) => {
     // Noop, the parent context uses the sni information, we don't need to do
     // anything here
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    return interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    return interpretNext(tail, rest)
   },
-  https: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  https: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    let baseVal = interpretNext(tail, rest)
     // We are reinterpreting the base as http, so we need to remove the tcp:// if it's there
-    baseVal = baseVal.replace('tcp://', '')
+    baseVal = baseVal?.replace('tcp://', '')
     return `https://${baseVal}`
   },
-  ws: (value: string, restMa: StringTuple[]) => {
-    const maHasTLS = hasTLS(restMa)
-    const sni = extractSNI(restMa)
-    const port = extractPort(restMa)
+  ws: (head, rest) => {
+    const maHasTLS = hasTLS(rest)
+    const sni = extractSNI(rest)
+    const port = extractPort(rest)
     if (maHasTLS && sni != null) {
       return `wss://${sni}${port}`
     }
     const protocol = maHasTLS ? 'wss://' : 'ws://'
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    let baseVal = interpretNext(tail, rest)
     // We are reinterpreting the base, so we need to remove the tcp:// if it's there
-    baseVal = baseVal.replace('tcp://', '')
+    baseVal = baseVal?.replace('tcp://', '')
     return `${protocol}${baseVal}`
   },
-  wss: (value: string, restMa: StringTuple[]) => {
-    const tailProto = restMa.pop()
-    if (tailProto == null) {
+  wss: (head, rest) => {
+    const tail = rest.pop()
+    if (tail == null) {
       throw new Error('Unexpected end of multiaddr')
     }
-    let baseVal = interpretNext(tailProto[0], tailProto[1] ?? '', restMa)
+    let baseVal = interpretNext(tail, rest)
     // We are reinterpreting the base as http, so we need to remove the tcp:// if it's there
-    baseVal = baseVal.replace('tcp://', '')
+    baseVal = baseVal?.replace('tcp://', '')
     return `wss://${baseVal}`
   }
 }
 
 export function multiaddrToUri (input: Multiaddr | string | Uint8Array, opts?: MultiaddrToUriOpts): string {
   const ma = multiaddr(input)
-  const parts = ma.stringTuples()
-  const head = parts.pop()
+  const components = ma.getComponents()
+  const head = components.pop()
   if (head == null) {
     throw new Error('Unexpected end of multiaddr')
   }
 
-  const protocol = protocols(head[0])
-  const interpreter = interpreters[protocol.name]
+  const interpreter = interpreters[head.name]
 
   if (interpreter == null) {
-    throw new Error(`No interpreter found for ${protocol.name}`)
+    throw new Error(`No interpreter found for ${head.name}`)
   }
 
-  let uri = interpreter(head[1] ?? '', parts)
+  let uri = interpreter(head, components) ?? ''
 
-  if (opts?.assumeHttp !== false && ASSUME_HTTP_CODES.includes(head[0])) {
+  if (opts?.assumeHttp !== false && ASSUME_HTTP_CODES.includes(head.code)) {
     // strip any declared protocol
     uri = uri.replace(/^.*:\/\//, '')
 
-    if (head[1] === '443') {
+    if (head.value === '443') {
       uri = `https://${uri}`
     } else {
       uri = `http://${uri}`
