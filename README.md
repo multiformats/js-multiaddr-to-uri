@@ -1,4 +1,4 @@
-# @multiformats/multiaddr-to-uri <!-- omit in toc -->
+# @multiformats/multiaddr-to-uri
 
 [![multiformats.io](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](http://multiformats.io)
 [![codecov](https://img.shields.io/codecov/c/github/multiformats/js-multiaddr-to-uri.svg?style=flat-square)](https://codecov.io/gh/multiformats/js-multiaddr-to-uri)
@@ -43,7 +43,7 @@ $ npm i @multiformats/multiaddr-to-uri
 
 ## Browser `<script>` tag
 
-Loading this module through a script tag will make it's exports available as `MultiformatsMultiaddrToUri` in the global namespace.
+Loading this module through a script tag will make its exports available as `MultiformatsMultiaddrToUri` in the global namespace.
 
 ```html
 <script src="https://unpkg.com/@multiformats/multiaddr-to-uri/dist/index.min.js"></script>
@@ -57,8 +57,8 @@ Loading this module through a script tag will make it's exports available as `Mu
 
 Licensed under either of
 
-- Apache 2.0, ([LICENSE-APACHE](LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT ([LICENSE-MIT](LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
+- Apache 2.0, ([LICENSE-APACHE](https://github.com/multiformats/js-multiaddr-to-uri/LICENSE-APACHE) / <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT ([LICENSE-MIT](https://github.com/multiformats/js-multiaddr-to-uri/LICENSE-MIT) / <http://opensource.org/licenses/MIT>)
 
 # Contribution
 
