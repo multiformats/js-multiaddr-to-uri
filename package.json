@@ -145,7 +145,7 @@
     "docs": "aegir docs"
   },
   "dependencies": {
-    "@multiformats/multiaddr": "^12.3.0"
+    "@multiformats/multiaddr": "^13.0.0"
   },
   "devDependencies": {
     "aegir": "^47.0.18"
