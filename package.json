@@ -1,6 +1,6 @@
 {
   "name": "@multiformats/multiaddr-to-uri",
-  "version": "11.0.2",
+  "version": "12.0.0",
   "description": "Convert a Multiaddr to a URI",
   "author": "Alan Shaw",
   "license": "Apache-2.0 OR MIT",

@@ -1,3 +1,17 @@
+## [12.0.0](https://github.com/multiformats/js-multiaddr-to-uri/compare/v11.0.2...v12.0.0) (2025-09-03)
+
+### ⚠ BREAKING CHANGES
+
+* Please upgrade to @multiformats/multiaddr 13.x.x
+
+### Bug Fixes
+
+* update @multiformats/multiaddr to 13.x.x ([#170](https://github.com/multiformats/js-multiaddr-to-uri/issues/170)) ([d25feab](https://github.com/multiformats/js-multiaddr-to-uri/commit/d25feab54be04dd7a2f6964daf190f3e82df9acc))
+
+### Trivial Changes
+
+* add or force update .github/workflows/stale.yml ([#169](https://github.com/multiformats/js-multiaddr-to-uri/issues/169)) ([85768b4](https://github.com/multiformats/js-multiaddr-to-uri/commit/85768b454ab3cdd918f9f1bf16d9b755690d3bf6))
+
 ## [11.0.2](https://github.com/multiformats/js-multiaddr-to-uri/compare/v11.0.1...v11.0.2) (2025-06-27)
 
 ### Dependencies
